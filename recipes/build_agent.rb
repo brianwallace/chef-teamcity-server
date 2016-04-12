@@ -83,16 +83,20 @@ agents.each do |agent, p|
   port += 1
 end
 
-
-# Install upstart file
-template "/etc/init/teamcity-agent.conf" do
-  source "upstart/teamcity-agent.erb"
-  owner  "root"
-  group  "root"
-  variables(
-      :user => node["teamcity_server"]["user"],
-      :group => node["teamcity_server"]["group"],
-      :data_dir => node["teamcity_server"]["data_dir"],
-      :root_dir => node["teamcity_server"]["root_dir"]
-  )
+# Install the service configuration files
+case node["platform"]
+when "ubuntu"
+  if node["platform_version"].to_f >= 15.04
+    # Install systemd service configuration files
+    include_recipe 'teamcity_server::agent-systemd'
+  #elsif node["platform_version"].to_f <= 14.10
+  else
+    # Assune Ubuntu platform <= 14.10
+    # Install upstart service configuration files
+    include_recipe 'teamcity_server::agent-upstart'
+  end
+else
+  # Assume systemd for others since that is the way most other distributions are
+  # moving.
+  include_recipe 'teamcity_server::agent-systemd'
 end
