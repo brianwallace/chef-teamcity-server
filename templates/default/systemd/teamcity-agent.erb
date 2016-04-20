@@ -10,8 +10,8 @@ User=<%= @user %>
 # Process the normal environment files for this user by starting a login shell
 # and outputting it all in a temp file.  This makes it compatible
 # with the non-systemd init scripts that still rely on .bashrc
-ExecStartPre=/bin/bash --login -c 'env > ~<%= @user %>/.systemd-environment-file'
-EnvironmentFile=-~<%= @user %>/.systemd-environment-file
+ExecStartPre=/bin/bash --login -c 'env > <%= @user_home %>/.systemd-environment-file'
+EnvironmentFile=-<%= @user_home %>/.systemd-environment-file
 ExecStart=<%= @root_dir %>/agents/buildAgent/bin/agent.sh start
 ExecStop=-<%= @root_dir %>/agents/buildAgent/bin/agent.sh stop force
 TimeoutStartSec=900

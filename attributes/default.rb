@@ -11,6 +11,7 @@ default["teamcity_server"]["logs_dir"]                          = node["teamcity
 default["teamcity_server"]["data_dir"]                          = "/opt/.BuildServer"
 default["teamcity_server"]["user"]                              = "teamcity"
 default["teamcity_server"]["group"]                             = "teamcity"
+default["teamcity_server"]["user_home"]                         = File.join("/home", node["teamcity_server"]["user"])
 default["teamcity_server"]["home_dir"]                          = node["teamcity_server"]["root_dir"]
 
 default["teamcity_server"]["server"]["database_internal"]       = nil

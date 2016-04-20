@@ -3,7 +3,7 @@ maintainer       "Brian Wallace"
 maintainer_email "bpwallace@gmail.com"
 license          "MIT"
 description      "Installs TeamCity CI from JetBrains"
-version          "0.2.3"
+version          "0.2.4"
 
 supports 'ubuntu'
 

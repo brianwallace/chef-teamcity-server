@@ -6,6 +6,7 @@ template "/lib/systemd/system/teamcity-agent.service" do
   group  "root"
   variables(
       :user => node["teamcity_server"]["user"],
+      :user_home => node["teamcity_server"]["user_home"],
       :root_dir => node["teamcity_server"]["root_dir"]
   )
 end
